@@ -14,7 +14,7 @@ class AppUserDefaultsClient {
     
     func addView(url: String){
         let prev = userDefaults.integer(forKey: "views\(url)")
-        userDefaults.set(prev+1, forKey: "views\(url)")
+        userDefaults.set(prev + 1, forKey: "views\(url)")
     }
     
     func getViews(url: String) -> Int{

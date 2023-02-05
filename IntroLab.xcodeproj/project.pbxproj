@@ -19,6 +19,8 @@
 		06749030298E735B0002BDB0 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0674902F298E735B0002BDB0 /* DetailTableViewCell.swift */; };
 		06749032298E89170002BDB0 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06749031298E89170002BDB0 /* APIClient.swift */; };
 		06749034298E896C0002BDB0 /* NewsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06749033298E896C0002BDB0 /* NewsEntity.swift */; };
+		06AA670F298FE8CE003579BB /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA670E298FE8CE003579BB /* ArticleRepository.swift */; };
+		06AA6711298FE974003579BB /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA6710298FE974003579BB /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		0674902F298E735B0002BDB0 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		06749031298E89170002BDB0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		06749033298E896C0002BDB0 /* NewsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEntity.swift; sourceTree = "<group>"; };
+		06AA670E298FE8CE003579BB /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
+		06AA6710298FE974003579BB /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,15 +72,12 @@
 		06749013298E5A940002BDB0 /* IntroLab */ = {
 			isa = PBXGroup;
 			children = (
+				06749022298E5A950002BDB0 /* Info.plist */,
 				0674902A298E5DFA0002BDB0 /* Delegates */,
 				0674902D298E72ED0002BDB0 /* Home */,
-				0674901D298E5A950002BDB0 /* Assets.xcassets */,
+				06AA670C298FE77A003579BB /* Supporting Files */,
 				0674902E298E72FE0002BDB0 /* News */,
-				0674901F298E5A950002BDB0 /* LaunchScreen.storyboard */,
-				06749022298E5A950002BDB0 /* Info.plist */,
-				06749031298E89170002BDB0 /* APIClient.swift */,
-				062D785F298FBA24000D910E /* AppUserDefaultsClient.swift */,
-				06749033298E896C0002BDB0 /* NewsEntity.swift */,
+				06AA670D298FE7B9003579BB /* Data */,
 			);
 			path = IntroLab;
 			sourceTree = "<group>";
@@ -107,6 +108,27 @@
 				06711ED7298ED6ED001CEDB9 /* WebViewController.swift */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		06AA670C298FE77A003579BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0674901D298E5A950002BDB0 /* Assets.xcassets */,
+				0674901F298E5A950002BDB0 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06AA670D298FE7B9003579BB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				06749031298E89170002BDB0 /* APIClient.swift */,
+				062D785F298FBA24000D910E /* AppUserDefaultsClient.swift */,
+				06749033298E896C0002BDB0 /* NewsEntity.swift */,
+				06AA670E298FE8CE003579BB /* ArticleRepository.swift */,
+				06AA6710298FE974003579BB /* CacheManager.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,10 +205,12 @@
 				062D7860298FBA24000D910E /* AppUserDefaultsClient.swift in Sources */,
 				06711ED8298ED6ED001CEDB9 /* WebViewController.swift in Sources */,
 				06749032298E89170002BDB0 /* APIClient.swift in Sources */,
+				06AA6711298FE974003579BB /* CacheManager.swift in Sources */,
 				06749019298E5A940002BDB0 /* HomeViewController.swift in Sources */,
 				06749015298E5A940002BDB0 /* AppDelegate.swift in Sources */,
 				06749029298E5C510002BDB0 /* NewsTableViewCell.swift in Sources */,
 				06749034298E896C0002BDB0 /* NewsEntity.swift in Sources */,
+				06AA670F298FE8CE003579BB /* ArticleRepository.swift in Sources */,
 				0674902C298E69ED0002BDB0 /* NewsViewController.swift in Sources */,
 				06749017298E5A940002BDB0 /* SceneDelegate.swift in Sources */,
 			);

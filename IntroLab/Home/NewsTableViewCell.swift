@@ -10,7 +10,7 @@ import UIKit
 class NewsTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "ImageTableCell"
-    
+    private let articlesRepository = ArticleRepository.shared
     private var previewImageView = UIImageView()
     private var textStackView = UIStackView()
     private var viewCountStackView = UIStackView()
@@ -98,7 +98,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     func config(with article: Article) {
-        APIClient.shared.loadImage(with: article.urlToImage ?? "",
+        articlesRepository.loadImage(path: article.urlToImage ?? "",
                                    completion: { [weak self] imageData in
             self?.previewImageView.image = UIImage(data: imageData)
         })

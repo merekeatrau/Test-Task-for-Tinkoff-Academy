@@ -11,7 +11,6 @@ class NewsViewController: UIViewController {
 
     private let tableView = UITableView()
     
-    private let apiClient: APIClient
     private var articlesEntity: ArticlesEntity?
     private var articles: Article {
         didSet {
@@ -19,8 +18,7 @@ class NewsViewController: UIViewController {
         }
     }
     
-    init(apiClient: APIClient, articles: Article){
-        self.apiClient = apiClient
+    init(articles: Article){
         self.articles = articles
         super.init(nibName:nil, bundle:nil)
     }

@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var articleRepository = ArticleRepository.shared
+    
     private let userDefaults = AppUserDefaultsClient.shared
     private let tableView = UITableView()
     private var networkManager = APIClient.shared
@@ -69,7 +71,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = articles[indexPath.row]
-        let newsVC = NewsViewController(apiClient: networkManager, articles: article)
+        let newsVC = NewsViewController(articles: article)
         newsVC.title = "Details"
         navigationController?.pushViewController(newsVC, animated: true)
         guard let url = article.url else{return}
@@ -80,7 +82,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     private func loadArticles() {
-        networkManager.loadArticles() { [weak self] loadedArticles in
+        articleRepository.getArticles{ [weak self] loadedArticles in
             self?.articles = loadedArticles
             guard let refreshControl = self?.tableView.refreshControl else { return }
             if  refreshControl.isRefreshing {

@@ -10,7 +10,7 @@ import UIKit
 class DetailTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "DetailTableViewCell"
-    
+    private let articlesRepository = ArticleRepository.shared
     private var previewImageView = UIImageView()
     private var headerTitleLabel = UILabel()
     private var dateLabel = UILabel()
@@ -90,7 +90,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func config(with article: Article) {
-        APIClient.shared.loadImage(with: article.urlToImage ?? "",
+        articlesRepository.loadImage(path: article.urlToImage ?? "",
                                    completion: { [weak self] imageData in
             self?.previewImageView.image = UIImage(data: imageData)
         })
