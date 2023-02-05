@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
+    private let userDefaults = AppUserDefaultsClient.shared
     private let tableView = UITableView()
     private var networkManager = APIClient.shared
     private var articles: [Article] = []{
@@ -41,7 +41,6 @@ class HomeViewController: UIViewController {
     }
     
     private func setConstraints() {
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.contentInset = .zero
         tableView.rowHeight = 160
@@ -73,6 +72,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let newsVC = NewsViewController(apiClient: networkManager, articles: article)
         newsVC.title = "Details"
         navigationController?.pushViewController(newsVC, animated: true)
+        guard let url = article.url else{return}
+        userDefaults.addView(url: url)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
@@ -80,10 +82,8 @@ extension HomeViewController {
     private func loadArticles() {
         networkManager.loadArticles() { [weak self] loadedArticles in
             self?.articles = loadedArticles
-            print("trying to close refresh")
             guard let refreshControl = self?.tableView.refreshControl else { return }
             if  refreshControl.isRefreshing {
-                print("close refresh")
                 refreshControl.endRefreshing()
             }
         }

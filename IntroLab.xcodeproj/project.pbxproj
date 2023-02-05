@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062D7860298FBA24000D910E /* AppUserDefaultsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062D785F298FBA24000D910E /* AppUserDefaultsClient.swift */; };
 		06711ED8298ED6ED001CEDB9 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06711ED7298ED6ED001CEDB9 /* WebViewController.swift */; };
 		06749015298E5A940002BDB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06749014298E5A940002BDB0 /* AppDelegate.swift */; };
 		06749017298E5A940002BDB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06749016298E5A940002BDB0 /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		062D785F298FBA24000D910E /* AppUserDefaultsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefaultsClient.swift; sourceTree = "<group>"; };
 		06711ED7298ED6ED001CEDB9 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		06749011298E5A940002BDB0 /* IntroLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntroLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06749014298E5A940002BDB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				0674901F298E5A950002BDB0 /* LaunchScreen.storyboard */,
 				06749022298E5A950002BDB0 /* Info.plist */,
 				06749031298E89170002BDB0 /* APIClient.swift */,
+				062D785F298FBA24000D910E /* AppUserDefaultsClient.swift */,
 				06749033298E896C0002BDB0 /* NewsEntity.swift */,
 			);
 			path = IntroLab;
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06749030298E735B0002BDB0 /* DetailTableViewCell.swift in Sources */,
+				062D7860298FBA24000D910E /* AppUserDefaultsClient.swift in Sources */,
 				06711ED8298ED6ED001CEDB9 /* WebViewController.swift in Sources */,
 				06749032298E89170002BDB0 /* APIClient.swift in Sources */,
 				06749019298E5A940002BDB0 /* HomeViewController.swift in Sources */,

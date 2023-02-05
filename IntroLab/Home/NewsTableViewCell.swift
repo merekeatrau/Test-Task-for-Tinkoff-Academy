@@ -18,7 +18,8 @@ class NewsTableViewCell: UITableViewCell {
     private var titleLabel = UILabel()
     private var viewCountLabel = UILabel()
     private var viewIconImageView = UIImageView(image: UIImage(systemName: "eye.fill"))
-
+    private var userDefaults = AppUserDefaultsClient.shared
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(newsStackView)
@@ -56,11 +57,11 @@ class NewsTableViewCell: UITableViewCell {
         viewCountLabel.textColor = .black
         viewCountLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         viewCountLabel.layer.opacity = 0.5
-        viewCountLabel.text = "0"
+        viewCountLabel.text = ""
         
         viewIconImageView.tintColor = .black
         viewIconImageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        viewIconImageView.layer.opacity = 0.5
+        viewIconImageView.layer.opacity = 0.0
         
         viewCountStackView.addArrangedSubview(viewIconImageView)
         viewCountStackView.addArrangedSubview(viewCountLabel)
@@ -84,12 +85,12 @@ class NewsTableViewCell: UITableViewCell {
         
         textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         textStackView.heightAnchor.constraint(equalTo: previewImageView.heightAnchor, multiplier: 1).isActive = true
-
+        
         newsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
         newsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
         newsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -98,9 +99,12 @@ class NewsTableViewCell: UITableViewCell {
     
     func config(with article: Article) {
         APIClient.shared.loadImage(with: article.urlToImage ?? "",
-                                        completion: { [weak self] imageData in
+                                   completion: { [weak self] imageData in
             self?.previewImageView.image = UIImage(data: imageData)
         })
         titleLabel.text = article.title
+        guard let url = article.url else{return}
+        viewCountLabel.text = "\(userDefaults.getViews(url: url))"
+        viewIconImageView.layer.opacity = 0.5
     }
 }

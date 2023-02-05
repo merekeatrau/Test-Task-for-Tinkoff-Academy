@@ -85,13 +85,3 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-//, completion:{
-//    guard let stringURL = articles.url, let url = URL(string: stringURL) else {
-//        print("Error: invalid URL")
-//        return
-//    }
-//    let webVC = WebViewController(url: url, headerTitle: self.articles.title)
-//    navigationController?.pushViewController(webVC, animated: true)
-//
-//}
