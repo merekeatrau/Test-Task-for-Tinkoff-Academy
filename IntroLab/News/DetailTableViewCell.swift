@@ -17,8 +17,8 @@ class DetailTableViewCell: UITableViewCell {
     private var stackView = UIStackView()
     private var descriptionLabel = UILabel()
     private var sourceLabel = UILabel()
-  
-    
+    var didTapCell: (() -> Void)?
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(previewImageView)
@@ -30,7 +30,7 @@ class DetailTableViewCell: UITableViewCell {
     
     private func setupViews() {
         previewImageView.layer.masksToBounds = true
-        previewImageView.layer.cornerRadius = 6
+        previewImageView.layer.cornerRadius = 8
         previewImageView.contentMode = .scaleAspectFill
         
         stackView.axis = .vertical
@@ -52,22 +52,23 @@ class DetailTableViewCell: UITableViewCell {
         descriptionLabel.textColor = .black
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         
-        
         sourceLabel.numberOfLines = 0
         sourceLabel.textColor = .black
         sourceLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         sourceLabel.layer.opacity = 0.5
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedImage))
-        previewImageView.isUserInteractionEnabled = true
-        previewImageView.addGestureRecognizer(tapGesture)
 
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAttributedText))
+        descriptionLabel.isUserInteractionEnabled = true
+        descriptionLabel.addGestureRecognizer(tapGesture)
         stackView.addArrangedSubview(headerTitleLabel)
         stackView.addArrangedSubview(dateLabel)
         stackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(sourceLabel)
 
+    }
+    
+    @objc func didTapAttributedText(gestureRecognizer: UITapGestureRecognizer) {
+        didTapCell?()
     }
     
     private func setConstraints() {
@@ -89,7 +90,6 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func config(with article: Article) {
-        
         APIClient.shared.loadImage(with: article.urlToImage ?? "",
                                    completion: { [weak self] imageData in
             self?.previewImageView.image = UIImage(data: imageData)
@@ -111,12 +111,9 @@ class DetailTableViewCell: UITableViewCell {
         } else {
             dateLabel.text = nil
         }
+        
     }
-    
-    @objc func tappedImage() {
-        print("wws")
-    }
-    
+
     private func formatDate(_ dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

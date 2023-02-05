@@ -38,6 +38,7 @@ class NewsViewController: UIViewController {
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isUserInteractionEnabled = true
         view.addSubview(tableView)
         setConstraints()
     }
@@ -47,8 +48,9 @@ class NewsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.contentInset = .zero
         tableView.separatorStyle = .none
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 800
+        tableView.rowHeight = UIScreen.main.bounds.height
+        tableView.estimatedRowHeight = UIScreen.main.bounds.height
+
 
         tableView.backgroundColor = .clear
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -69,10 +71,27 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailTableViewCell.reuseIdentifier, for: indexPath) as? DetailTableViewCell else {
             return UITableViewCell()
         }
-        
+        cell.backgroundColor = .clear
         cell.config(with: articles)
-        
+        cell.didTapCell = {
+            guard let stringURL = self.articles.url, let url = URL(string: stringURL) else {
+                    print("Error: invalid URL")
+                    return
+                }
+                let webVC = WebViewController(url: url, headerTitle: self.articles.title)
+            self.navigationController?.pushViewController(webVC, animated: true)
+            
+            }
         return cell
     }
 }
 
+//, completion:{
+//    guard let stringURL = articles.url, let url = URL(string: stringURL) else {
+//        print("Error: invalid URL")
+//        return
+//    }
+//    let webVC = WebViewController(url: url, headerTitle: self.articles.title)
+//    navigationController?.pushViewController(webVC, animated: true)
+//
+//}

@@ -8,24 +8,19 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     private let tableView = UITableView()
-    
     private var networkManager = APIClient.shared
-    
     private var articles: [Article] = []{
         didSet {
             tableView.reloadData()
         }
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkManager.loadArticles() { [weak self] loadedArticles in
-            self?.articles = loadedArticles
-        }
-
+        
+        loadArticles()
         title = "News"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
@@ -35,19 +30,14 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         view.addSubview(tableView)
         setConstraints()
-        print("articles \(articles)")
         
         let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     
     @objc func doSomething(refreshControl: UIRefreshControl) {
-        print("Hello World!")
-        
-        // somewhere in your code you might need to call:
-        refreshControl.endRefreshing()
-        tableView.reloadData()
+        loadArticles()
     }
     
     private func setConstraints() {
@@ -77,6 +67,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.config(with: articles[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = articles[indexPath.row]
         let newsVC = NewsViewController(apiClient: networkManager, articles: article)
@@ -85,3 +76,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension HomeViewController {
+    private func loadArticles() {
+        networkManager.loadArticles() { [weak self] loadedArticles in
+            self?.articles = loadedArticles
+            print("trying to close refresh")
+            guard let refreshControl = self?.tableView.refreshControl else { return }
+            if  refreshControl.isRefreshing {
+                print("close refresh")
+                refreshControl.endRefreshing()
+            }
+        }
+    }
+}
