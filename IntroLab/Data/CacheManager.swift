@@ -78,7 +78,6 @@ class CacheManager {
         path.data(using: .utf8)?.base64EncodedString() ?? ""
     }
     
-    
 }
 
 

@@ -110,7 +110,6 @@ class APIClient {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    
                 }
             }
         }

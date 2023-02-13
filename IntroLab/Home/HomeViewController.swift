@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     private var articleRepository = ArticleRepository.shared
-    
+    private let refreshControl = UIRefreshControl()
     private let userDefaults = AppUserDefaultsClient.shared
     private let tableView = UITableView()
     private var networkManager = APIClient.shared
@@ -33,7 +33,6 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
         setConstraints()
         
-        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
@@ -73,6 +72,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let article = articles[indexPath.row]
         let newsVC = NewsViewController(articles: article)
         newsVC.title = "Details"
+
         navigationController?.pushViewController(newsVC, animated: true)
         guard let url = article.url else{return}
         userDefaults.addView(url: url)
@@ -82,12 +82,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     private func loadArticles() {
-        articleRepository.getArticles{ [weak self] loadedArticles in
+        refreshControl.beginRefreshing()
+        articleRepository.getArticles { [weak self] loadedArticles in
+            self?.refreshControl.endRefreshing()
             self?.articles = loadedArticles
-            guard let refreshControl = self?.tableView.refreshControl else { return }
-            if  refreshControl.isRefreshing {
-                refreshControl.endRefreshing()
-            }
         }
     }
 }

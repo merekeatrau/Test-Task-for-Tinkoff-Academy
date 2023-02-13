@@ -20,6 +20,13 @@ class NewsTableViewCell: UITableViewCell {
     private var viewIconImageView = UIImageView(image: UIImage(systemName: "eye.fill"))
     private var userDefaults = AppUserDefaultsClient.shared
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        previewImageView.image = nil
+        titleLabel.text = nil
+        viewCountLabel.text = nil
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(newsStackView)

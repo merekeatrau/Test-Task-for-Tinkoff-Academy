@@ -77,6 +77,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 let webVC = WebViewController(url: url, headerTitle: self.articles.title)
+            webVC.navigationController?.navigationBar.prefersLargeTitles = false
             self.navigationController?.pushViewController(webVC, animated: true)
             
             }

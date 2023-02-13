@@ -27,7 +27,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Source"
+        navigationController?.navigationBar.prefersLargeTitles = false
+
         webView = WKWebView()
         webView.navigationDelegate = self
         view.addSubview(webView)
@@ -56,6 +57,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         ]
         
         NSLayoutConstraint.activate(webViewConstraints + progressViewConstraints)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
